@@ -1,0 +1,193 @@
+<mujoco model="Hexapod">
+    <asset>
+        <texture type="skybox" builtin="gradient" rgb1="1 1 1" rgb2=".6 .8 1" width="256" height="256"/>
+        <mesh name="upper" scale="1 1 1" file="Upper Chassis.stl"></mesh>
+        <mesh name="lower" scale="1 1 1" file="Lower Chassis.stl"></mesh>
+        <mesh name="coxa_left" scale="1 1 1" file="left_servo_with_bracket_modi.stl"></mesh>
+        <mesh name="coxa_right" scale="1 1 1" file="right servo+bracket_modi.stl"></mesh>
+        <mesh name="femur" scale="1 1 1" file="Tibia.stl"></mesh>
+        <mesh name="tibia_left" scale="1 1 1" file="left_leg_with_servo.stl"></mesh>
+        <mesh name="tibia_right" scale="1 1 1" file="right_leg_with_servo.stl"></mesh>
+    </asset>
+
+    <default>
+        <!-- <geom contype="0" conaffinity="0"></geom> -->
+        <joint limited="true" damping="10000" stiffness="0" range="-62.830 62.830"/>
+    </default>
+
+<worldbody>
+        <light pos="0 1 1" dir="0 -1 -1" diffuse="1 1 1"/>
+        <geom type="plane" size="1000 1000 0.1" rgba="0 0 0 1"/>
+
+        <body name="lower">
+            <geom type="mesh" name="lower" mesh="lower" quat="0 0 0.707 0.707" pos="-10 0 75" mass="0.294"></geom>
+            <freejoint />
+            <!-- <site name="touchy" size="5" pos="-97.5 -50.5 92" rgba="1 0 0 1"/>
+            <site name="touchy_2" size="5" pos="77.5 -50.5 92" rgba="0 1 0 1"/> -->
+        </body>
+        <body name="upper">
+            <geom type="mesh" name="upper" mesh="upper" quat="0 0 0.707 0.707" pos="-10 0 142" mass="0.216" ></geom>
+            <freejoint />
+            <!-- <geom type="mesh" name="lower" mesh="lower" quat="0 0 0.707 0.707" pos="-10 0 75" mass="1000"></geom> -->
+            <!-- <geom type="mesh" name="lower" mesh="lower" quat="0 0 0.707 0.707" pos="-10 0 80" ></geom> -->
+            <!-- <joint name="x" type="hinge" damping="2000"  pos="0 0 0.6" axis="0 1 0"/>
+            <site name="touchy" size="0.05" pos="0 -.01 0" /> -->
+        <!-- <body pos="91.5 -49.5 102" > -->
+        <body name="cx_1" pos="91 -57.4 112" euler="0 0 45">
+            <geom type="mesh" name="coxa_left:1" mesh="coxa_left" euler="0 0 -90" mass="0.176"></geom>
+            <joint name="coxa:1" type="hinge"  pos="-5 16.3 30" axis="0 0 1"/>
+            <!-- <geom type="sphere" name="finder" pos="78 50 142" size="1" rgba="0 1 0 1"></geom> -->
+
+            <body pos="20 -35 21.2" >
+                <geom type="mesh" name="femur_left:1" mesh="femur" euler="90 90 -45"  mass="0.216"></geom>
+                <joint name="femur:1" type="hinge"  pos="3 21 -14.5" axis="1 0 0"/>
+                <!-- <geom type="sphere" name="finder" pos="3 21 -14.5" size="1" rgba="0 1 0 1"></geom> -->
+                <!-- <site name="touchy" size="0.05" pos="0 -.01 0" /> -->
+                <body pos="105 102 -86" >
+                    <geom type="mesh" name="tibia_left:1" mesh="tibia_left" euler="0 90 90" mass="0.085"></geom>
+                    <joint name="tibia:1" type="hinge"  pos="-105 -157.2 71.7" axis="1 0 0"/>
+                    <site name="touch:1" size="5" pos="-123 -152.2 -36" rgba="1 1 1 0"/>
+                    <!-- <geom type="sphere" name="finder" pos="-105 -157.2 71.7"  size="1" rgba="0 1 0 1"></geom> -->
+                </body>
+            </body>
+        </body>
+        <body name="cx_2" pos="-5.2 -84.2 112">
+            <geom type="mesh" name="coxa_left:2" mesh="coxa_left" euler="0 0 -90" mass="0.176"></geom>
+            <joint name="coxa:2" type="hinge"  pos="-5 16.3 30" axis="0 0 1"/>
+            <!-- <geom type="sphere" name="finder" pos="78 50 142" size="1" rgba="0 1 0 1"></geom> -->
+            <!-- <site name="touchy" size="0.05" pos="0 -.01 0" /> -->
+            <body pos="20 -35 21.2" >
+                <geom type="mesh" name="femur_left:2" mesh="femur" euler="90 90 -45"  mass="0.216"></geom>
+                <joint name="femur:2" type="hinge"  pos="3 21 -14.5" axis="1 0 0"/>
+                <!-- <geom type="sphere" name="finder" pos="3 21 -14.5" size="1" rgba="0 1 0 1"></geom> -->
+                <!-- <site name="touchy" size="0.05" pos="0 -.01 0" /> -->
+                <body pos="105 102 -86" >
+                    <geom type="mesh" name="tibia_left:2" mesh="tibia_left" euler="0 90 90" mass="0.085"></geom>
+                    <joint name="tibia:2" type="hinge"  pos="-105 -157.2 71.7" axis="1 0 0"/>
+                    <site name="touch:2" size="5" pos="-123 -152.2 -36" rgba="1 1 1 0"/>
+                    <!-- <geom type="sphere" name="finder" pos="-105 -157.2 71.7"  size="1" rgba="0 1 0 1"></geom> -->
+                </body>
+            </body>
+        </body>
+        <body name="cx_3" pos="-104.3 -64.1 112" euler="0 0 -45">
+            <geom type="mesh" name="coxa_left:3" mesh="coxa_left" euler="0 0 -90" mass="0.176"></geom>
+            <joint name="coxa:3" type="hinge"  pos="-5 16.3 30" axis="0 0 1"/>
+            <!-- <geom type="sphere" name="finder" pos="78 50 142" size="1" rgba="0 1 0 1"></geom> -->
+            <!-- <site name="touchy" size="0.05" pos="0 -.01 0" /> -->
+            <body pos="20 -35 21.2" >
+                <geom type="mesh" name="femur_left:3" mesh="femur" euler="90 90 -45"  mass="0.216"></geom>
+                <joint name="femur:3" type="hinge"  pos="3 21 -14.5" axis="1 0 0"/>
+                <!-- <geom type="sphere" name="finder" pos="3 21 -14.5" size="1" rgba="0 1 0 1"></geom> -->
+                <!-- <site name="touchy" size="0.05" pos="0 -.01 0" /> -->
+                <body pos="105 102 -86" >
+                    <geom type="mesh" name="tibia_left:3" mesh="tibia_left" euler="0 90 90" mass="0.085"></geom>
+                    <joint name="tibia:3" type="hinge"  pos="-105 -157.2 71.7" axis="1 0 0"/>
+                    <site name="touch:3" size="5" pos="-123 -152.2 -36" rgba="1 1 1 0"/>
+                    <!-- <geom type="sphere" name="finder" pos="-105 -157.2 71.7"  size="1" rgba="0 1 0 1"></geom> -->
+                </body>
+            </body>
+        </body>
+
+        <body name="cx_4" pos="86.7 39.3 102" euler="0 0 -45">
+            <geom type="mesh" name="coxa_right:1" mesh="coxa_right" euler="0 0 -90"  mass="0.176"></geom>
+            <joint name="coxa:4" type="hinge"  pos="-14 1 41" axis="0 0 1"/>
+            <!-- <geom type="sphere" name="finder" pos="78 50 142" size="1" rgba="0 1 0 1"></geom> -->
+            <!-- <site name="touchy" size="0.05" pos="0 -.01 0" /> -->
+            <body pos="10 84.5 31.5" >
+                <geom type="mesh" name="femur_right:1" mesh="femur" euler="90 90 -45"  mass="0.216"></geom>
+                <joint name="femur:4" type="hinge"  pos="3 -55.2 -14.5" axis="1 0 0"/>
+                <!-- <geom type="sphere" name="finder" pos="3 -55.2 -14.5" size="1" rgba="0 1 0 1"></geom> -->
+                <!-- <site name="touchy" size="0.05" pos="0 -.01 0" /> -->
+                <body pos="-72 195.3 87.3" >
+                    <geom type="mesh" name="tibia_right:1" mesh="tibia_right" euler="0 90 90"  mass="0.085"></geom>
+                    <joint name="tibia:4" type="hinge"  pos="75 -174.2 -101.8" axis="1 0 0"/>
+                    <site name="touch:4" size="5" pos="55 -182 -210" rgba="1 1 1 0"/>
+                    <!-- <geom type="sphere" name="finder"  size="1" rgba="0 1 0 1"></geom> -->
+                </body>
+            </body>
+        </body>
+
+        <body name="cx_5" pos="4.5 68.5 102" >
+            <geom type="mesh" name="coxa_right:2" mesh="coxa_right" euler="0 0 -90"  mass="0.176"></geom>
+            <joint name="coxa:5" type="hinge"  pos="-14 1 41" axis="0 0 1"/>
+            <!-- <geom type="sphere" name="finder" pos="78 50 142" size="1" rgba="0 1 0 1"></geom> -->
+            <!-- <site name="touchy" size="0.05" pos="0 -.01 0" /> -->
+            <body pos="10 84.5 31.5" >
+                <geom type="mesh" name="femur_right:2" mesh="femur" euler="90 90 -45"  mass="0.216"></geom>
+                <joint name="femur:5" type="hinge"  pos="3 -55.2 -14.5" axis="1 0 0"/>
+                <!-- <geom type="sphere" name="finder" pos="3 -55.2 -14.5" size="1" rgba="0 1 0 1"></geom> -->
+                <!-- <site name="touchy" size="0.05" pos="0 -.01 0" /> -->
+                <body pos="-72 195.3 87.3" >
+                    <geom type="mesh" name="tibia_right:2" mesh="tibia_right" euler="0 90 90"  mass="0.085"></geom>
+                    <joint name="tibia:5" type="hinge"  pos="75 -174.2 -101.8" axis="1 0 0"/>
+                    <site name="touch:5" size="5" pos="55 -182 -210" rgba="1 1 1 0"/>
+                    <!-- <geom type="sphere" name="finder"  size="1" rgba="0 1 0 1"></geom> -->
+                </body>
+            </body>
+        </body>
+
+        <body name="cx_6" pos="-86.3 59.7 102" euler="0 0 45">
+            <geom type="mesh" name="coxa_right:3" mesh="coxa_right" euler="0 0 -90"  mass="0.176"></geom>
+            <joint name="coxa:6" type="hinge"  pos="-14 1 41" axis="0 0 1"/>
+            <!-- <geom type="sphere" name="finder" pos="78 50 142" size="1" rgba="0 1 0 1"></geom> -->
+            <!-- <site name="touchy" size="0.05" pos="0 -.01 0" /> -->
+            <body pos="10 84.5 31.5" >
+                <geom type="mesh" name="femur_right:3" mesh="femur" euler="90 90 -45"  mass="0.216"></geom>
+                <joint name="femur:6" type="hinge"  pos="3 -55.2 -14.5" axis="1 0 0"/>
+                <!-- <geom type="sphere" name="finder" pos="3 -55.2 -14.5" size="1" rgba="0 1 0 1"></geom> -->
+                <!-- <site name="touchy" size="0.05" pos="0 -.01 0" /> -->
+                <body pos="-72 195.3 87.3" >
+                    <geom type="mesh" name="tibia_right:3" mesh="tibia_right" euler="0 90 90"  mass="0.085"></geom>
+                    <joint name="tibia:6" type="hinge"  pos="75 -174.2 -101.8" axis="1 0 0"/>
+                    <site name="touch:6" size="5" pos="55 -182 -210" rgba="1 1 1 0"/>
+                    <!-- <geom type="sphere" name="finder"  size="1" rgba="0 1 0 1"></geom> -->
+                </body>
+            </body>
+        </body>
+
+
+        </body>
+</worldbody>
+
+  <equality>
+      <connect name="cc_2" body1="lower" body2="cx_2" anchor="-10.2 -67.9 92"/>
+      <connect name="cc_5" body1="lower" body2="cx_5" anchor="-10.2 67.9 92"/>
+      <connect name="cc_4" body1="lower" body2="cx_4" anchor="77.5 50.5 92"/>
+      <connect name="cc_6" body1="lower" body2="cx_6" anchor="-97.5 50.5 92"/>
+      <connect name="cc_1" body1="lower" body2="cx_1" anchor="77.5 -50.5 92"/>
+      <connect name="cc_3" body1="lower" body2="cx_3" anchor="-97.5 -50.5 92"/>
+  </equality>
+
+
+  <sensor>
+      <touch name="touch_1" site="touch:1"></touch>
+      <touch name="touch_2" site="touch:2"></touch>
+      <touch name="touch_3" site="touch:3"></touch>
+      <touch name="touch_4" site="touch:4"></touch>
+      <touch name="touch_5" site="touch:5"></touch>
+      <touch name="touch_6" site="touch:6"></touch>
+  </sensor>
+
+
+  <actuator>
+      <position name="coxa_1"  kp="1000000"  joint="coxa:1"/>
+      <position name="coxa_2"  kp="1000000" joint="coxa:2"/>
+      <position name="coxa_3"  kp="1000000" joint="coxa:3"/>
+      <position name="coxa_4"  kp="1000000" joint="coxa:4"/>
+      <position name="coxa_5"  kp="1000000" joint="coxa:5"/>
+      <position name="coxa_6"  kp="1000000" joint="coxa:6"/>
+      <position name="femur_1"  kp="1000000" joint="femur:1"/>
+      <position name="femur_2"  kp="1000000" joint="femur:2"/>
+      <position name="femur_3"  kp="1000000" joint="femur:3"/>
+      <position name="femur_4"  kp="1000000" joint="femur:4"/>
+      <position name="femur_5"  kp="1000000" joint="femur:5"/>
+      <position name="femur_6"  kp="1000000" joint="femur:6"/>
+      <position name="tibia_1"  kp="1000000" joint="tibia:1"/>
+      <position name="tibia_2"  kp="1000000" joint="tibia:2"/>
+      <position name="tibia_3"  kp="1000000" joint="tibia:3"/>
+      <position name="tibia_4"  kp="1000000" joint="tibia:4"/>
+      <position name="tibia_5"  kp="1000000" joint="tibia:5"/>
+      <position name="tibia_6"  kp="1000000" joint="tibia:6"/>
+  </actuator>
+
+</mujoco>
